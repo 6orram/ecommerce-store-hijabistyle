@@ -20,15 +20,15 @@ const useCart = create(
     const existingItem = currentItems.find((item) => item.id === data.id);
     
     if (existingItem) {
-      return toast('Item already in cart.');
+      return toast('L\'article est déjà dans le panier.');
     }
 
     set({ items: [...get().items, data] });
-    toast.success('Item added to cart.');
+    toast.success('L\'article a été ajouté au panier.');
   },
   removeItem: (id: string) => {
     set({ items: [...get().items.filter((item) => item.id !== id)] });
-    toast.success('Item removed from cart.');
+    toast.success('L\'article a été retiré du panier.');
   },
   removeAll: () => set({ items: [] }),
 }), {

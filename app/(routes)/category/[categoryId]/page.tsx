@@ -8,9 +8,11 @@ import getProducts from "@/actions/get-products";
 import getCategory from '@/actions/get-category';
 import getSizes from '@/actions/get-sizes';
 import getColors from '@/actions/get-colors';
+import getSeasons from '@/actions/get-seasons';
 
 import Filter from './components/filter';
 import MobileFilters from './components/mobile-filters';
+
 
 export const revalidate = 0;
 
@@ -21,6 +23,7 @@ interface CategoryPageProps {
   searchParams: {
     colorId: string;
     sizeId: string;
+    seasonId: string;
   }
 }
 
@@ -32,7 +35,9 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
     categoryId: params.categoryId,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId,
+    seasonId: searchParams.seasonId
   });
+  const seasons = await getSeasons();
   const sizes = await getSizes();
   const colors = await getColors();
   const category = await getCategory(params.categoryId);
@@ -45,17 +50,22 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         />
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-            <MobileFilters sizes={sizes} colors={colors} />
+            <MobileFilters seasons={seasons} sizes={sizes} colors={colors} />
             <div className="hidden lg:block">
               <Filter
                 valueKey="sizeId" 
-                name="Sizes" 
+                name="Taille" 
                 data={sizes}
               />
               <Filter 
                 valueKey="colorId" 
-                name="Colors" 
+                name="Couleur" 
                 data={colors}
+              />
+              <Filter 
+                valueKey="seasonId" 
+                name="Saison" 
+                data={seasons}
               />
             </div>
             <div className="mt-6 lg:col-span-4 lg:mt-0">

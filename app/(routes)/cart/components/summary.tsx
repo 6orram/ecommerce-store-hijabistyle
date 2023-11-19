@@ -8,6 +8,7 @@ import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
+import Modal from "@/components/ui/modal";
 
 const Summary = () => {
   const searchParams = useSearchParams();
@@ -16,12 +17,12 @@ const Summary = () => {
 
   useEffect(() => {
     if (searchParams.get('success')) {
-      toast.success('Payment completed.');
+      toast.success('Paiement effectué.');
       removeAll();
     }
 
     if (searchParams.get('canceled')) {
-      toast.error('Something went wrong.');
+      toast.error('Quelque chose s\'est mal passé.');
     }
   }, [searchParams, removeAll]);
 
@@ -37,21 +38,25 @@ const Summary = () => {
     window.location = response.data.url;
   }
 
+
   return ( 
     <div
       className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
     >
       <h2 className="text-lg font-medium text-gray-900">
-        Order summary
+      Résumé de la commande
       </h2>
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-          <div className="text-base font-medium text-gray-900">Order total</div>
+          <div className="text-base font-medium text-gray-900">Total de la commande</div>
          <Currency value={totalPrice} />
         </div>
       </div>
       <Button onClick={onCheckout} disabled={items.length === 0} className="w-full mt-6">
-        Checkout
+      Continuer le Paiement en ligne
+      </Button>
+      <Button className="w-full mt-6">
+      Continuer le Paiement à la livraison
       </Button>
     </div>
   );
