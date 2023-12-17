@@ -1,8 +1,12 @@
+"use client";
 import { Billboard } from "@/types";
 
 interface BillboardProps {
   data: Billboard;
 }
+
+
+
 
 const Billboard: React.FC<BillboardProps> = ({
   data

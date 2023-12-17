@@ -21,6 +21,12 @@ const ProductPage: React.FC<ProductPageProps> = async ({
     categoryId: product?.category?.id
   });
 
+  const colorProducts = await getProducts({ 
+    name: product?.name
+  });
+
+  
+
   if (!product) {
     return null;
   }
@@ -35,6 +41,8 @@ const ProductPage: React.FC<ProductPageProps> = async ({
               <Info data={product} />
             </div>
           </div>
+          <hr className="my-10" />
+          <ProductList title="Autre couleur" items={colorProducts} />
           <hr className="my-10" />
           <ProductList title="Articles associés" items={suggestedProducts} />
         </div>

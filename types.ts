@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   category: Category;
   name: string;
+  description: string;
   price: string;
   isFeatured: boolean;
   size: Size;
@@ -22,7 +23,9 @@ export interface Billboard {
 };
 
 export interface Category {
+  active: any;
   id: string;
+  imageUrl: string
   name: string;
   billboard: Billboard;
 };
