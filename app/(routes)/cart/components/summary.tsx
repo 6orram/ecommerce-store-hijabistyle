@@ -33,7 +33,7 @@ const Summary: React.FC = () => {
   useEffect(() => {
     // Check if all form fields are filled
     const formComplete = formData.nom && formData.tele && formData.adresse && formData.confirmer;
-    setIsFormComplete(formComplete);
+    setIsFormComplete(!!formComplete);
   }, [formData]);
 
   const totalPrice = items.reduce((total, item) => total + Number(item.price), 0);
